@@ -21,7 +21,7 @@ public class GameManager {
     }
 
     public String[][] initalizeBoard(){
-        String[] choices = {"♠", "♣", "♥", "♦", "☻", "●", "■", "♪"};
+        String[] choices = {"A", "B", "C", "D", "E", "F", "G", "H"};
         int[] used = {2,2,2,2,2,2,2,2};
         Random rand = new Random();
 

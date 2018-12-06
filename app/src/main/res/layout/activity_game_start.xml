@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/background"
     tools:context=".GameStart">
 
     <LinearLayout
@@ -28,7 +28,7 @@
                 android:layout_marginTop="40dp"
                 android:letterSpacing="0.3"
                 android:text="CORRECT"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
                 android:layout_marginEnd="2dp"
                 android:letterSpacing="0.3"
                 android:text="INCORRECT"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,23 +119,12 @@
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:background="#535353"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
@@ -157,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple"
+                android:background="@drawable/ripple_tl"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"
@@ -199,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple"
+                android:background="@drawable/ripple_bl"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"
@@ -346,7 +335,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple"
+                android:background="@drawable/ripple_tr"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"
@@ -388,7 +377,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple"
+                android:background="@drawable/ripple_br"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"

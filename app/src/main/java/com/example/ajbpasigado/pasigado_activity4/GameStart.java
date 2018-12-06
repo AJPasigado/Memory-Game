@@ -4,6 +4,8 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +16,15 @@ public class GameStart extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_start);
         initializeBoard();
         startTimer();
+
     }
 
     public void initializeBoard(){
@@ -60,49 +67,48 @@ public class GameStart extends AppCompatActivity {
     CountDownTimer countDownTimer;
 
     public void clickButton(View v){
-        if (countDownTimer != null) countDownTimer.onFinish();
+        if (countDownTimer != null) {
+            countDownTimer.onFinish();
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
 
         Button currentButton = findViewById(v.getId());
+        currentButton.setEnabled(false);
 
-        if (currentButton != lastButton){
-            String id = getResources().getResourceName(v.getId());
-            int r = Integer.parseInt(id.split("_")[2].split("")[1]);
-            int c = Integer.parseInt(id.split("_")[2].split("")[2]);
-            currentButton.setText(board[r][c]);
+        String id = getResources().getResourceName(v.getId());
+        int r = Integer.parseInt(id.split("_")[2].split("")[1]);
+        int c = Integer.parseInt(id.split("_")[2].split("")[2]);
+        currentButton.setText(board[r][c]);
 
-            if (lastIndex != null) {
-                if (gameManager.checker(lastIndex, new int[] {r, c})){
-                    gameManager.correct ++;
-                    TextView correct = findViewById(R.id.tv_correct);
-                    correct.setText(Integer.toString(gameManager.getCorrect()));
-                    currentButton.setEnabled(false);
-                    lastButton.setEnabled(false);
-                } else {
-                    resetTimer(currentButton, lastButton);
-                    gameManager.incorrect++;
-                    TextView incorrect = findViewById(R.id.tv_incorrect);
-                    incorrect.setText(Integer.toString(gameManager.getIncorrect()));
-                }
-                lastIndex = null;
-                lastButton = null;
+        if (lastButton != null){
+            if (gameManager.checker(lastIndex, new int[] {r, c})){
+                gameManager.correct ++;
+                TextView correct = findViewById(R.id.tv_correct);
+                correct.setText(Integer.toString(gameManager.getCorrect()));
             } else {
-                lastIndex = new int[]{r, c};
-                lastButton = currentButton;
+                TextView tv = findViewById(R.id.tv_timer);
+                resetTimer(currentButton, lastButton, tv);
+                gameManager.incorrect++;
+                TextView incorrect = findViewById(R.id.tv_incorrect);
+                incorrect.setText(Integer.toString(gameManager.getIncorrect()));
             }
+            lastIndex = null;
+            lastButton = null;
+        } else  if (lastButton == null){
+            lastIndex = new int[]{r, c};
+            lastButton = currentButton;
         }
     }
 
 
-    public void resetTimer(final Button first, final Button second){
+    public void resetTimer(final Button first, final Button second, final TextView tv){
         final Button one = first;
         final Button two = second;
-        final TextView tv = findViewById(R.id.tv_timer);
         countDownTimer = new CountDownTimer(3000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 tv.setText("00:0" + millisUntilFinished / 1000);
-                one.setEnabled(false);
-                two.setEnabled(false);
             }
 
             public void onFinish() {
@@ -110,7 +116,6 @@ public class GameStart extends AppCompatActivity {
                 two.setEnabled(true);
                 one.setText("???");
                 two.setText("???");
-                tv.setText("00:00");
             }
         }.start();
     }
