@@ -88,6 +88,11 @@ public class GameStart extends AppCompatActivity {
                 gameManager.correct ++;
                 TextView correct = findViewById(R.id.tv_correct);
                 correct.setText(Integer.toString(gameManager.getCorrect()));
+
+                if (gameManager.correct == 8){
+                    ViewDialog alert = new ViewDialog();
+                    alert.showDialog(this, "You Won!", this);
+                }
             } else {
                 TextView tv = findViewById(R.id.tv_timer);
                 resetTimer(currentButton, lastButton, tv);
@@ -102,7 +107,6 @@ public class GameStart extends AppCompatActivity {
             lastButton = currentButton;
         }
     }
-
 
     public void resetTimer(final Button first, final Button second, final TextView tv){
         final Button one = first;
@@ -123,6 +127,10 @@ public class GameStart extends AppCompatActivity {
     }
 
     public void newGame(View v){
+        newGameProcess();
+    }
+
+    public void newGameProcess(){
         TextView incorrect = findViewById(R.id.tv_incorrect);
         incorrect.setText("0");
 

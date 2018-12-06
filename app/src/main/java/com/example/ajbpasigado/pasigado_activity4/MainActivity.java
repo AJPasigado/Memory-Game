@@ -27,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void quit(View v){
-
-        finish();
+        QuitDialog alert = new QuitDialog();
+        alert.showDialog(this);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        QuitDialog alert = new QuitDialog();
+        alert.showDialog(this);
+    }
 }
