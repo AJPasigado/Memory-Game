@@ -1,5 +1,6 @@
 package com.example.ajbpasigado.pasigado_activity4;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +14,17 @@ import android.widget.Toast;
 public class GameStart extends AppCompatActivity {
     GameManager gameManager = new GameManager();
     String[][] board;
+    int[] lastIndex = null;
+    Button lastButton;
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_start);
@@ -61,10 +67,6 @@ public class GameStart extends AppCompatActivity {
             }
         }
     }
-
-    int[] lastIndex = null;
-    Button lastButton;
-    CountDownTimer countDownTimer;
 
     public void clickButton(View v){
         if (countDownTimer != null) {
@@ -118,5 +120,23 @@ public class GameStart extends AppCompatActivity {
                 two.setText("???");
             }
         }.start();
+    }
+
+    public void newGame(View v){
+        TextView incorrect = findViewById(R.id.tv_incorrect);
+        incorrect.setText("0");
+
+        TextView correct = findViewById(R.id.tv_correct);
+        correct.setText("0");
+
+        board = null;
+        gameManager = new GameManager();
+        lastIndex = null;
+        lastButton = null;
+        if (countDownTimer != null) countDownTimer.cancel();
+        countDownTimer = null;
+
+        initializeBoard();
+        startTimer();
     }
 }
