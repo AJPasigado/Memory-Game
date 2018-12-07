@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ViewDialog {
-    public void showDialog(final Activity activity, String msg, final GameStart gameStart){
+    public void showDialog(final Activity activity, String msg, int time, final GameStart gameStart){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -19,6 +19,11 @@ public class ViewDialog {
 
         TextView text = dialog.findViewById(R.id.tv_msg);
         text.setText(msg);
+
+        TextView details = dialog.findViewById(R.id.tv_details);
+        details.setText(((time/60) > 0) ?
+                String.format("You finished the game in %02d minute(s) and %02d second(s).", time/60, time%60) :
+                String.format("You finished the game in %02d second(s).", time%60));
 
         Button play_again = dialog.findViewById(R.id.btn_play_again);
         play_again.setOnClickListener(new View.OnClickListener() {

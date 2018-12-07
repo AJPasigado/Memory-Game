@@ -1,6 +1,5 @@
 package com.example.ajbpasigado.pasigado_activity4;
 
-import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +17,13 @@ public class GameStart extends AppCompatActivity {
     int[] lastIndex = null;
     Button lastButton;
     CountDownTimer countDownTimer;
+    Timer stopwatch = new Timer();
+
+    int seconds = 0;
+    boolean countDownRunning = false;
+
+    int GAME_TIME = 3000;
+    int BOARD_SIZE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +35,35 @@ public class GameStart extends AppCompatActivity {
         setContentView(R.layout.activity_game_start);
         initializeBoard();
         startTimer();
+        startStopwatch();
     }
 
     @Override
     protected void onResume() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onResume();
+    }
+
+    public void startStopwatch() {
+        final TextView tv = findViewById(R.id.tv_timer);
+        stopwatch.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!countDownRunning) tv.setText(formatSeconds(seconds));
+                        seconds++;
+                    }
+                });
+            }
+        }, GAME_TIME, 1000);
+    }
+
+    private String formatSeconds(int seconds){
+        String sec = String.format("%02d", seconds % 60);
+        String min = String.format("%02d", seconds / 60);
+        return min + ":" + sec;
     }
 
     public void initializeBoard(){
@@ -46,7 +73,7 @@ public class GameStart extends AppCompatActivity {
 
     public void startTimer(){
         final TextView tv = findViewById(R.id.tv_timer);
-        new CountDownTimer(3000, 1000) {
+        new CountDownTimer(GAME_TIME, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 tv.setText("00:0" + millisUntilFinished / 1000);
@@ -66,8 +93,8 @@ public class GameStart extends AppCompatActivity {
                 { findViewById(R.id.btn_30), findViewById(R.id.btn_31), findViewById(R.id.btn_32), findViewById(R.id.btn_33)},
         };
 
-        for (int i = 0; i< 4; i++){
-            for (int j = 0; j< 4; j++){
+        for (int i = 0; i< BOARD_SIZE; i++){
+            for (int j = 0; j< BOARD_SIZE; j++){
                 btns[i][j].setText(board[i][j]);
                 btns[i][j].setEnabled(activate);
             }
@@ -78,8 +105,8 @@ public class GameStart extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.onFinish();
             countDownTimer.cancel();
-            countDownTimer = null;
         }
+        countDownTimer = null;
 
         Button currentButton = findViewById(v.getId());
         currentButton.setEnabled(false);
@@ -95,9 +122,9 @@ public class GameStart extends AppCompatActivity {
                 TextView correct = findViewById(R.id.tv_correct);
                 correct.setText(Integer.toString(gameManager.getCorrect()));
 
-                if (gameManager.correct == 8){
+                if (gameManager.correct == ((BOARD_SIZE * BOARD_SIZE) / 2)){
                     ViewDialog alert = new ViewDialog();
-                    alert.showDialog(this, "You Won!", this);
+                    alert.showDialog(this, "Congratulations!", seconds, this);
                 }
             } else {
                 TextView tv = findViewById(R.id.tv_timer);
@@ -117,16 +144,18 @@ public class GameStart extends AppCompatActivity {
     public void resetTimer(final Button first, final Button second, final TextView tv){
         final Button one = first;
         final Button two = second;
-        countDownTimer = new CountDownTimer(3000, 1000) {
+        countDownTimer = new CountDownTimer(GAME_TIME, 1000) {
 
             public void onTick(long millisUntilFinished) {
+                countDownRunning = true;
                 tv.setText("00:0" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
+                countDownRunning = false;
                 one.setEnabled(true);
-                two.setEnabled(true);
                 one.setText("???");
+                two.setEnabled(true);
                 two.setText("???");
             }
         }.start();
@@ -149,6 +178,7 @@ public class GameStart extends AppCompatActivity {
         lastButton = null;
         if (countDownTimer != null) countDownTimer.cancel();
         countDownTimer = null;
+        seconds = 0;
 
         initializeBoard();
         startTimer();
