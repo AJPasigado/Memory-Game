@@ -1,6 +1,7 @@
 package com.example.ajbpasigado.pasigado_activity4;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -35,5 +34,11 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         QuitDialog alert = new QuitDialog();
         alert.showDialog(this);
+    }
+
+    @Override
+    protected void onResume() {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        super.onResume();
     }
 }

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class QuitDialog {
+public class QuitDialog extends  Activity{
     public void showDialog(final Activity activity){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -34,5 +34,11 @@ public class QuitDialog {
         });
 
         dialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        super.onResume();
     }
 }
