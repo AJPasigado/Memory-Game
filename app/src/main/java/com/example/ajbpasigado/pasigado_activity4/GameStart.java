@@ -52,7 +52,7 @@ public class GameStart extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (!countDownRunning) tv.setText(formatSeconds(seconds));
+                        tv.setText(formatSeconds(seconds));
                         seconds++;
                     }
                 });
@@ -148,7 +148,6 @@ public class GameStart extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
                 countDownRunning = true;
-                tv.setText("00:0" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
