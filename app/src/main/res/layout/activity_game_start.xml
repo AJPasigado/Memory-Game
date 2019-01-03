@@ -204,7 +204,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_bl"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_40"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_50"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"
@@ -263,6 +291,34 @@
 
             <Button
                 android:id="@+id/btn_31"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_41"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_51"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -337,6 +393,34 @@
                 android:text="@string/marks"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_42"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_52"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -351,7 +435,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_tr"
+                android:background="@drawable/ripple"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"
@@ -393,7 +477,219 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_br"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_43"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_53"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_04"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_14"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_24"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_34"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_44"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_54"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_05"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_15"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_25"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_35"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_45"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:enabled="false"
+                android:letterSpacing="0.1"
+                android:onClick="clickButton"
+                android:text="@string/marks"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_55"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
                 android:enabled="false"
                 android:letterSpacing="0.1"
                 android:onClick="clickButton"

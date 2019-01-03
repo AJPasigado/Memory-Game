@@ -1,5 +1,6 @@
 package com.example.ajbpasigado.pasigado_activity4;
 
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,18 +13,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameStart extends AppCompatActivity {
+    public static final String MY_PREFS_NAME = "MyPrefs";
+
     GameManager gameManager = new GameManager();
     String[][] board;
     int[] lastIndex = null;
     Button lastButton;
     CountDownTimer countDownTimer;
+    CountDownTimer startTimer;
     Timer stopwatch = new Timer();
 
     int seconds = 0;
     boolean countDownRunning = false;
 
     int GAME_TIME = 3000;
-    int BOARD_SIZE = 4;
+    int BOARD_SIZE = 5;
+    int GAME_MODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +38,11 @@ public class GameStart extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_start);
+
+        loadPref();
+
         initializeBoard();
         startTimer();
-        startStopwatch();
     }
 
     @Override
@@ -44,8 +51,16 @@ public class GameStart extends AppCompatActivity {
         super.onResume();
     }
 
+    private void loadPref(){
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        GAME_TIME = prefs.getInt("time", 3000);
+        BOARD_SIZE = prefs.getInt("size", 4);
+        GAME_MODE = prefs.getInt("sym", 0);
+    }
+
     public void startStopwatch() {
         final TextView tv = findViewById(R.id.tv_timer);
+        stopwatch = new Timer();
         stopwatch.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -57,7 +72,7 @@ public class GameStart extends AppCompatActivity {
                     }
                 });
             }
-        }, GAME_TIME, 1000);
+        }, 0, 1000);
     }
 
     private String formatSeconds(int seconds){
@@ -67,38 +82,59 @@ public class GameStart extends AppCompatActivity {
     }
 
     public void initializeBoard(){
-        board = gameManager.initalizeBoard();
+        board = gameManager.initalizeBoard(GAME_MODE, BOARD_SIZE);
         changeBoardAll(board, false);
     }
 
     public void startTimer(){
         final TextView tv = findViewById(R.id.tv_timer);
-        new CountDownTimer(GAME_TIME, 1000) {
+        startTimer = new CountDownTimer(GAME_TIME, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tv.setText("00:0" + millisUntilFinished / 1000);
+                tv.setText("00:0" + (millisUntilFinished + 1000) / 1000);
             }
 
             public void onFinish() {
                 changeBoardAll(gameManager.defaultBoard(), true);
+                startStopwatch();
             }
         }.start();
     }
 
     public void changeBoardAll(String[][] board, Boolean activate){
         Button[][] btns = new Button[][]{
-                { findViewById(R.id.btn_00), findViewById(R.id.btn_01), findViewById(R.id.btn_02), findViewById(R.id.btn_03)},
-                { findViewById(R.id.btn_10), findViewById(R.id.btn_11), findViewById(R.id.btn_12), findViewById(R.id.btn_13)},
-                { findViewById(R.id.btn_20), findViewById(R.id.btn_21), findViewById(R.id.btn_22), findViewById(R.id.btn_23)},
-                { findViewById(R.id.btn_30), findViewById(R.id.btn_31), findViewById(R.id.btn_32), findViewById(R.id.btn_33)},
+                { findViewById(R.id.btn_00), findViewById(R.id.btn_01), findViewById(R.id.btn_02), findViewById(R.id.btn_03), findViewById(R.id.btn_04) , findViewById(R.id.btn_05)},
+                { findViewById(R.id.btn_10), findViewById(R.id.btn_11), findViewById(R.id.btn_12), findViewById(R.id.btn_13), findViewById(R.id.btn_14) , findViewById(R.id.btn_15)},
+                { findViewById(R.id.btn_20), findViewById(R.id.btn_21), findViewById(R.id.btn_22), findViewById(R.id.btn_23), findViewById(R.id.btn_24) , findViewById(R.id.btn_25)},
+                { findViewById(R.id.btn_30), findViewById(R.id.btn_31), findViewById(R.id.btn_32), findViewById(R.id.btn_33), findViewById(R.id.btn_34) , findViewById(R.id.btn_35)},
+                { findViewById(R.id.btn_40), findViewById(R.id.btn_41), findViewById(R.id.btn_42), findViewById(R.id.btn_43), findViewById(R.id.btn_44) , findViewById(R.id.btn_45)},
+                { findViewById(R.id.btn_50), findViewById(R.id.btn_51), findViewById(R.id.btn_52), findViewById(R.id.btn_53), findViewById(R.id.btn_54) , findViewById(R.id.btn_55)},
         };
 
         for (int i = 0; i< BOARD_SIZE; i++){
             for (int j = 0; j< BOARD_SIZE; j++){
-                btns[i][j].setText(board[i][j]);
-                btns[i][j].setEnabled(activate);
+                if (!(BOARD_SIZE % 2 != 0 && (i == (BOARD_SIZE/2) && j == (BOARD_SIZE/2)))) {
+                    btns[i][j].setText(board[i][j]);
+                    btns[i][j].setEnabled(activate);
+                } else {
+                    btns[i][j].setText("۞");
+                }
             }
         }
+
+        if (BOARD_SIZE < btns.length){
+            for (int i = BOARD_SIZE; i<btns.length; i++){
+                for (int j = 0; j<btns.length; j++){
+                    if (i == 4) findViewById(R.id.linear_4).setVisibility(View.GONE);
+                    if (i == 5) findViewById(R.id.linear_5).setVisibility(View.GONE);
+                    btns[i][j].setVisibility(View.GONE);
+                }
+            }
+        }
+
+        btns[0][BOARD_SIZE-1].setBackground(getDrawable(R.drawable.ripple_tr));
+        btns[BOARD_SIZE-1][0].setBackground(getDrawable(R.drawable.ripple_bl));
+        btns[BOARD_SIZE-1][BOARD_SIZE-1].setBackground(getDrawable(R.drawable.ripple_br));
     }
 
     public void clickButton(View v){
@@ -123,6 +159,7 @@ public class GameStart extends AppCompatActivity {
                 correct.setText(Integer.toString(gameManager.getCorrect()));
 
                 if (gameManager.correct == ((BOARD_SIZE * BOARD_SIZE) / 2)){
+                    stopwatch.cancel();
                     ViewDialog alert = new ViewDialog();
                     alert.showDialog(this, "Congratulations!", seconds, this);
                 }
@@ -175,7 +212,12 @@ public class GameStart extends AppCompatActivity {
         gameManager = new GameManager();
         lastIndex = null;
         lastButton = null;
-        if (countDownTimer != null) countDownTimer.cancel();
+        if (countDownTimer != null) {
+            countDownTimer.onFinish();
+            countDownTimer.cancel();
+        }
+        startTimer.cancel();
+        stopwatch.cancel();
         countDownTimer = null;
         seconds = 0;
 

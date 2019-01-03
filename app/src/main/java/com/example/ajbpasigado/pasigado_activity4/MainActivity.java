@@ -1,6 +1,7 @@
 package com.example.ajbpasigado.pasigado_activity4;
 
 import android.content.Intent;
+import android.graphics.Path;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View v){
         Intent intent = new Intent(this, GameStart.class);
+        startActivity(intent);
+    }
+
+    public void options(View v){
+        Intent intent = new Intent(this, Options.class);
         startActivity(intent);
     }
 

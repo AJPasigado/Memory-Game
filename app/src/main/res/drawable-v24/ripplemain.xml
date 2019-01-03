@@ -10,11 +10,24 @@
         </shape>
     </item>
 
-    <item android:id="@android:id/background">
-        <shape android:shape="rectangle">
-            <stroke android:color="@color/colorAccent" android:width="1px"/>
-            <corners android:radius="100dp" />
-        </shape>
+    <item>
+        <selector>
+            <item android:state_checked="true">
+                <shape android:shape="rectangle">
+                    <stroke android:color="@color/colorAccent" android:width="1px"/>
+                    <corners android:radius="100dp" />
+                    <solid android:color="#66ffffff"></solid>
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="rectangle">
+                    <stroke android:color="@color/colorAccent" android:width="1px"/>
+                    <corners android:radius="100dp" />
+                </shape>
+            </item>
+        </selector>
     </item>
+
 
 </ripple>
